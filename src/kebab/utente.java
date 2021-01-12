@@ -5,6 +5,9 @@
  */
 package kebab;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author pogliani.mattia
@@ -13,11 +16,11 @@ public class utente implements Runnable {
 
     private boolean soddisfatto = false;
     private boolean stop = false;
-    private Kebabbaro kebabbaro;
+    private Panino kebab;
     private int numero;
 
-    public utente(Kebabbaro kebabbaro, int numero) {
-        this.kebabbaro = kebabbaro;
+    public utente(Panino kebab, int numero) {
+        this.kebab = kebab;
         this.numero = numero;
     }
 
@@ -25,9 +28,15 @@ public class utente implements Runnable {
     public void run() {
         while (!stop) {
             while (!soddisfatto) {
-                soddisfatto = kebabbaro.sfornaKebab();
+                soddisfatto = kebab.prendiPanino();
                 if (soddisfatto) {
                     System.out.println("THREAD SODDISFATTO: " + numero);
+                    notify();
+                } else {
+                    try {
+                        wait();
+                    } catch (InterruptedException ex) {
+                    }
                 }
             }
         }

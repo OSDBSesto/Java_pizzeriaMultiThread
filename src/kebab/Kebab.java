@@ -15,14 +15,17 @@ public class Kebab {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Kebabbaro kebabbaro = new Kebabbaro();
+        Panino kebab = new Panino();
         Thread t[] = new Thread[20];
-        for(int i = 0; i<20; i ++){
-            t[i] = new Thread(new utente(kebabbaro, i));
+        Thread kebabbaro = new Kebabbaro(kebab);
+        for (int i = 0; i < 20; i++) {
+            t[i] = new Thread(new utente(kebab, i));
         }
-        for(int i = 0; i<20; i ++){
+        
+        kebabbaro.start();
+        for (int i = 0; i < 20; i++) {
             t[i].start();
         }
     }
-    
+
 }

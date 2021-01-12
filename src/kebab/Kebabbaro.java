@@ -12,16 +12,22 @@ import java.util.logging.Logger;
  *
  * @author pogliani.mattia
  */
-public class Kebabbaro {
+public class Kebabbaro extends Thread{
     
-    public boolean kebab;
+    private Panino kebab;
+
+    public Kebabbaro(Panino kebab) {
+        this.kebab = kebab;
+    }
     
-    public synchronized boolean sfornaKebab(){
-        kebab = false;
+    public void run(){
+        prepara();
+        kebab.paninoPronto();
+    }
+    public void prepara(){
         try {
             Thread.sleep(3000);
-            kebab = true;
         } catch (InterruptedException ex) {}
-        return kebab;
     }
+    
 }
