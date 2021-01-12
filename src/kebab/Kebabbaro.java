@@ -19,7 +19,7 @@ public class Kebabbaro {
     public synchronized boolean sfornaKebab(){
         kebab = false;
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             kebab = true;
         } catch (InterruptedException ex) {}
         return kebab;

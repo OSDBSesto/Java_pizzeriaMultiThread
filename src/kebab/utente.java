@@ -14,16 +14,21 @@ public class utente implements Runnable {
     private boolean soddisfatto = false;
     private boolean stop = false;
     private Kebabbaro kebabbaro;
+    private int numero;
 
-    public utente(Kebabbaro kebabbaro) {
+    public utente(Kebabbaro kebabbaro, int numero) {
         this.kebabbaro = kebabbaro;
+        this.numero = numero;
     }
 
     @Override
     public void run() {
         while (!stop) {
             while (!soddisfatto) {
-                kebabbaro.sfornaKebab();
+                soddisfatto = kebabbaro.sfornaKebab();
+                if (soddisfatto) {
+                    System.out.println("THREAD SODDISFATTO: " + numero);
+                }
             }
         }
     }
